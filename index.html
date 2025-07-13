@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priyansu Kundu - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom CSS and Animations -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* General Section Animation */
+        @keyframes sectionFadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-animated {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(80px);
+        }
+
+        .section-animated.animate-in-view {
+            animation: sectionFadeInUp 0.8s ease-out forwards;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section Specific Animations */
+        @keyframes fadeInUpx {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fadeInUpx 0.8s ease-out forwards; opacity: 0; }
+        .animation-delay-500 { animation-delay: 0.5s; }
+        .animation-delay-1000 { animation-delay: 1s; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        .animation-delay-5000 { animation-delay: 5s; }
+
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 0.25; }
+        }
+        .animate-pulse-subtle { animation: pulse-subtle 4s infinite ease-in-out; }
+
+        @keyframes ping-slow {
+            0% { transform: scale(0.2); opacity: 0.8; }
+            80%, 100% { transform: scale(1.5); opacity: 0; }
+        }
+        .animate-ping-slow { animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite; }
+
+        @keyframes draw-path {
+            0% { stroke-dashoffset: 1000; stroke-dasharray: 1000; }
+            100% { stroke-dashoffset: 0; stroke-dasharray: 1000; }
+        }
+        .animate-draw-path { animation: draw-path 5s linear infinite alternate; }
+
+        @keyframes code-flow {
+            0% { transform: translateX(-10px); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateX(10px); opacity: 0; }
+        }
+        .animate-code-flow { animation: code-flow 6s linear infinite; }
+
+        /* About Section Specific Animations */
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+        .animate-pulse-slow { animation: pulse-slow 2s infinite ease-in-out; }
+
+        @keyframes type-code {
+            0%, 10% { transform: scaleX(0); opacity: 0; } /* Start hidden, no width */
+            15% { transform: scaleX(1); opacity: 1; } /* Appear and type out */
+            90% { transform: scaleX(1); opacity: 1; } /* Stay visible */
+            100% { transform: scaleX(0); opacity: 0; } /* Fade out */
+        }
+        .animate-type-code {
+            animation: type-code 20s linear infinite; /* Longer duration for more lines */
+            opacity: 0; /* Start hidden */
+            transform-origin: left; /* Ensure scaling is from the left */
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+        /* Adjusted and added more animation delays */
+        .animation-delay-0 { animation-delay: 0s; }
+        .animation-delay-1000 { animation-delay: 1s; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-3000 { animation-delay: 3s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        .animation-delay-5000 { animation-delay: 5s; }
+        .animation-delay-6000 { animation-delay: 6s; }
+        .animation-delay-7000 { animation-delay: 7s; }
+        .animation-delay-8000 { animation-delay: 8s; }
+        .animation-delay-9000 { animation-delay: 9s; }
+        .animation-delay-10000 { animation-delay: 10s; }
+        .animation-delay-11000 { animation-delay: 11s; }
+        .animation-delay-12000 { animation-delay: 12s; }
+        .animation-delay-13000 { animation-delay: 13s; }
+        .animation-delay-14000 { animation-delay: 14s; }
+        .animation-delay-15000 { animation-delay: 15s; }
+        .animation-delay-16000 { animation-delay: 16s; }
+        .animation-delay-17000 { animation-delay: 17s; }
+
+
+        /* Education Section Specific Animations */
+        @keyframes draw-line {
+            from { stroke-dashoffset: 100; stroke-dasharray: 100; }
+            to { stroke-dashoffset: 0; stroke-dasharray: 100; }
+        }
+        .animate-draw-line { animation: draw-line 3s linear infinite alternate; }
+
+        /* Skills Section Specific Animations */
+        @keyframes scan-line {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .animate-scan-line { animation: scan-line 4s linear infinite alternate; }
+
+        /* Projects Section Specific Animations */
+        @keyframes ping-medium {
+            0% { transform: scale(0.5); opacity: 0.9; }
+            70%, 100% { transform: scale(1.8); opacity: 0; }
+        }
+        .animate-ping-medium { animation: ping-medium 2.5s cubic-bezier(0, 0, 0.2, 1) infinite; }
+
+        @keyframes draw-path-slow {
+            0% { stroke-dashoffset: 500; stroke-dasharray: 500; }
+            100% { stroke-dashoffset: 0; stroke-dasharray: 500; }
+        }
+        .animate-draw-path-slow { animation: draw-path-slow 7s linear infinite alternate; }
+
+        /* Certifications Section Specific Animations */
+        @keyframes data-flow {
+            0% { transform: translateY(0); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(20px); opacity: 0; }
+        }
+        .animate-data-flow { animation: data-flow 5s linear infinite; }
+
+
+        /* Certificate Card Flip Animation */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 250px; /* Fixed height for consistent cards */
+            perspective: 1000px; /* 3D effect */
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            border-radius: 0.75rem; /* rounded-xl */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .flip-card-front {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #e2e8f0; /* gray-200 */
+        }
+
+        .dark .flip-card-front {
+            background-color: #1f2937; /* gray-800 */
+            color: #e5e7eb; /* gray-100 */
+            border: 1px solid #374151; /* gray-700 */
+        }
+
+        .flip-card-back {
+            background-color: #f0f4f8; /* Light blue-gray */
+            color: white;
+            transform: rotateY(180deg);
+            overflow: hidden; /* Ensure image fits */
+            border: 1px solid #e2e8f0; /* gray-200 */
+            display: flex; /* Ensure content is centered */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark .flip-card-back {
+            background-color: #111827; /* Darker blue-gray */
+            color: white;
+            border: 1px solid #374151; /* gray-700 */
+        }
+
+        .flip-card-back .placeholder-text {
+            color: #6b7280; /* gray-500 */
+            font-size: 0.875rem; /* text-sm */
+        }
+
+        .dark .flip-card-back .placeholder-text {
+            color: #9ca3af; /* gray-400 */
+        }
+
+        /* Initial hint animation for flip cards */
+        @keyframes hintFlip {
+            0% { transform: rotateY(0deg); }
+            25% { transform: rotateY(10deg); }
+            50% { transform: rotateY(-10deg); }
+            75% { transform: rotateY(5deg); }
+            100% { transform: rotateY(0deg); }
+        }
+
+        .flip-card-hint-animation .flip-card-inner {
+            animation: hintFlip 1.5s ease-in-out 0.5s 1; /* Play once after a delay */
+        }
+
+        /* Modal specific styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    /* Ensure modal content itself is constrained by viewport */
+    max-width: 95vw; /* Max width 95% of viewport width */
+    max-height: 95vh; /* Max height 95% of viewport height */
+    width: auto; /* Allow content to dictate width up to max-width */
+    height: auto; /* Allow content to dictate height up to max-height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    overflow: hidden; /* Crucial: Hide any content that overflows the modal box */
+    animation: zoomIn 0.3s ease-out forwards;
+    box-sizing: border-box; /* Include padding in width/height calculations */
+}
+
+.dark .modal-content {
+    background-color: #1f2937; /* gray-800 */
+}
+
+.modal-image {
+    /* Ensure image scales properly within the constrained modal-content */
+    max-width: 100%; /* Image will not exceed 100% of its parent's width */
+    max-height: 100%; /* Image will not exceed 100% of its parent's height */
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Scale down to fit without cropping, preserving aspect ratio */
+    display: block; /* Ensures it behaves like a block element, removing potential inline spacing issues */
+    border-radius: 0.5rem;
+    flex-shrink: 1; /* Allows the image to shrink if its container gets smaller */
+    flex-grow: 0; /* Prevents the image from growing beyond its natural size if there's extra space */
+}
+
+        .modal-close-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #fff; /* White for visibility on dark overlay */
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+            z-index: 100; /* Ensure button is on top */
+        }
+
+        .modal-close-button:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* More distinct hover */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Image Slideshow specific styles */
+        .image-slideshow-img {
+            transition: opacity 0.7s ease-in-out; /* Smooth fade transition */
+        }
+
+        /* Utility classes for toggling visibility */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen font-inter bg-gray-50 text-gray-800">
+
+    <!-- Dark Mode Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="darkModeToggle" class="p-2 rounded-full shadow-lg transition-all duration-300
+                   focus:outline-none focus:ring-2 focus:ring-offset-2
+                   bg-white text-gray-700 hover:bg-gray-100 focus:ring-blue-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-40 bg-white shadow-md py-4 transition-colors duration-300">
+        <div class="container mx-auto px-4 flex justify-between items-center flex-wrap"> <!-- Added flex-wrap here -->
+            <a href="#hero" class="text-2xl font-bold text-blue-600">Welcome to Priyansu's corner </a>
+            <div class="space-x-6 flex flex-wrap justify-center md:justify-end mt-2 md:mt-0"> <!-- Added flex-wrap and justify-center for mobile -->
+                <a href="#about" class="nav-link font-medium text-gray-700 hover:text-blue-600">About</a>
+                <a href="#education" class="nav-link font-medium text-gray-700 hover:text-blue-600">Education</a>
+                <a href="#skills" class="nav-link font-medium text-gray-700 hover:text-blue-600">Skills</a>
+                <a href="#professional-skills" class="nav-link font-medium text-gray-700 hover:text-blue-600">Pro Skills</a>
+                <a href="#projects" class="nav-link font-medium text-gray-700 hover:text-blue-600">Projects</a>
+                <a href="#certifications" class="nav-link font-medium text-gray-700 hover:text-blue-600">Certifications</a>
+                <a href="#contact" class="nav-link font-medium text-gray-700 hover:text-blue-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-950 to-purple-950 text-white overflow-hidden section-animated">
+        <div class="absolute inset-0 z-0 opacity-40">
+            <svg class="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <pattern id="grid-hero" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <path d="M 10 0 L 0 0 L 0 10" fill="none" stroke="currentColor" stroke-width="0.1" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid-hero)" class="text-blue-800 opacity-15 animate-pulse-subtle" />
+                <path d="M 5 5 L 95 5 L 95 95 L 5 95 Z" fill="none" stroke="currentColor" stroke-width="0.3" class="text-cyan-500 opacity-50 animate-draw-path" />
+                <path d="M 15 15 L 85 15 L 85 85 L 15 85 Z" fill="none" stroke="currentColor" stroke-width="0.2" class="text-green-500 opacity-50 animate-draw-path animation-delay-500" />
+                <path d="M 30 50 L 70 50 M 50 30 L 50 70" fill="none" stroke="currentColor" stroke-width="0.4" class="text-purple-500 opacity-60 animate-fade-in-slow" />
+                <circle cx="25" cy="25" r="1.2" fill="currentColor" class="text-green-400 animate-ping-slow animation-delay-1000" />
+                <circle cx="75" cy="75" r="1.5" fill="currentColor" class="text-cyan-400 animate-ping-slow animation-delay-2000" />
+                <circle cx="50" cy="50" r="0.8" fill="currentColor" class="text-purple-400 animate-ping-slow animation-delay-3000" />
+                <circle cx="10" cy="90" r="1" fill="currentColor" class="text-yellow-400 animate-ping-slow animation-delay-4000" />
+                <circle cx="90" cy="10" r="1.1" fill="currentColor" class="text-red-400 animate-ping-slow animation-delay-5000" />
+                <text x="10" y="40" font-size="3" fill="currentColor" class="text-blue-300 opacity-0 animate-code-flow animation-delay-1000">01010101</text>
+                <text x="70" y="60" font-size="3.5" fill="currentColor" class="text-green-300 opacity-0 animate-code-flow animation-delay-2500">11010010</text>
+                <text x="30" y="80" font-size="2.8" fill="currentColor" class="text-purple-300 opacity-0 animate-code-flow animation-delay-4000">00111001</text>
+            </svg>
+        </div>
+        <div class="text-center z-10 p-6 bg-white bg-opacity-10 rounded-xl shadow-2xl backdrop-filter backdrop-blur-sm">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-4 animate-fade-in-up">Hi, I'm <span class="text-yellow-300">Priyansu Kundu</span></h1>
+            <p class="text-xl md:text-3xl mb-8 animate-fade-in-up animation-delay-500">A Passionate <span class="font-semibold text-yellow-200">Computer Science student</span></p>
+            <a href="#projects" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold shadow-lg
+                       hover:scale-105 transition-transform duration-300 animate-fade-in-up animation-delay-1000">
+                View My Work
+            </a>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="relative py-10 bg-gray-50 transition-colors duration-300 opacity-0 transform translate-y-10 section-animated">
+        <div class="absolute inset-0 z-0 opacity-30">
+            <svg class="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <linearGradient id="codeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="rgba(74, 222, 128, 0.5)" />
+                        <stop offset="100%" stop-color="rgba(59, 130, 246, 0.5)" />
+                    </linearGradient>
+                </defs>
+                <text x="5" y="15" font-size="4" fill="url(#codeGradient)" class="animate-type-code animation-delay-0">const portfolio = &#123;</text>
+                <text x="8" y="25" font-size="4" fill="url(#codeGradient)" class="animate-type-code animation-delay-1000">  name: "Priyansu Kundu",</text>
+                <text x="8" y="35" font-size="4" fill="url(#codeGradient)" class="animate-type-code animation-delay-2000">  role: "AI & ML Student",</text>
+                <text x="5" y="45" font-size="4" fill="url(#codeGradient)" class="animate-type-code animation-delay-3000">&#125;;</text>
+
+                <text x="20" y="10" font-size="3.5" fill="url(#codeGradient)" class="animate-type-code animation-delay-4000">function loadProjects(user) &#123;</text>
+                <text x="23" y="20" font-size="3.5" fill="url(#codeGradient)" class="animate-type-code animation-delay-5000">  if (user.isAuthenticated) &#123;</text>
+                <text x="26" y="30" font-size="3.5" fill="url(#codeGradient)" class="animate-type-code animation-delay-6000">    return fetch('/api/projects');</text>
+                <text x="23" y="40" font-size="3.5" fill="url(#codeGradient)" class="animate-type-code animation-delay-7000">  &#125;</text>
+                <text x="20" y="50" font-size="3.5" fill="url(#codeGradient)" class="animate-type-code animation-delay-8000">&#125;</text>
+
+                <text x="50" y="60" font-size="4" fill="url(#codeGradient)" class="animate-type-code animation-delay-9000">import &#123; useState, useEffect &#125; from 'react';</text>
+                <text x="50" y="70" font-size="4" fill="url(#codeGradient)" class="animate-type-code animation-delay-10000">console.log("App initialized.");</text>
+                <text x="50" y="80" font-size="4" fill="url(#codeGradient)" class="animate-type-code animation-delay-11000">const data = &#123; id: 1, value: "test" &#125;;</text>
+                <text x="50" y="90" font-size="4" fill="url(#codeGradient)" class="animate-type-code animation-delay-12000">return &lt;div&gt;Hello&lt;/div&gt;;</text>
+
+                <circle cx="10" cy="10" r="0.5" fill="currentColor" class="text-green-500 animate-pulse-slow animation-delay-100" />
+                <circle cx="90" cy="90" r="0.7" fill="currentColor" class="text-cyan-500 animate-pulse-slow animation-delay-300" />
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 max-w-4xl z-10 relative">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center md:space-x-10">
+                <div class="md:w-1/3 mb-8 md:mb-0">
+                    <img src="./images/Profile.jpg" alt="Your Photo"
+                         class="rounded-full shadow-xl w-64 h-64 object-cover mx-auto transform hover:scale-105 transition-transform duration-300"
+                         onerror="this.onerror=null; this.src='https://placehold.co/300x300/CCCCCC/FFFFFF?text=Your+Photo';" />
+                </div>
+                <div class="md:w-2/3 text-lg leading-relaxed text-center md:text-left">
+                    <p class="mb-4">
+                        Hello! I'm <span class="font-semibold text-blue-600">Priyansu</span>, a dedicated and innovative AIML student with a passion for creating impactful and user-friendly applications. I specialize in building robust web solutions and am always eager to learn new technologies and tackle challenging problems.
+                    </p>
+                    <p class="mb-4">
+                        I am currently pursuing my B.tech in Artificial Intelligence and Machine Learning .When I'm not coding, you can find me exploring new tech trends, driving, or travelling.
+                    </p>
+                    <p class="mb-6">
+                        I believe in the power of technology to transform lives and am committed to using my skills to make a positive impact in the world. Let's connect and explore how we can collaborate!
+                    </p>
+                    <div class="text-center md:text-left">
+                        <a href="./assets/priyansukundu.pdf" download="Priyansu Kundu.pdf"
+                           class="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg
+                                  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 0 003 3h10a3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="relative py-10 bg-white transition-colors duration-300 opacity-0 transform translate-y-10 section-animated">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <svg class="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <pattern id="circuit-edu" width="15" height="15" patternUnits="userSpaceOnUse">
+                        <path d="M 0 0 L 15 15 M 15 0 L 0 15" fill="none" stroke="currentColor" stroke-width="0.1" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#circuit-edu)" class="text-purple-700" />
+                <circle cx="20" cy="80" r="0.8" fill="currentColor" class="text-yellow-500 animate-ping-slow animation-delay-200" />
+                <circle cx="80" cy="20" r="0.8" fill="currentColor" class="text-red-500 animate-ping-slow animation-delay-700" />
+                <path d="M 5 50 H 95" fill="none" stroke="currentColor" stroke-width="0.2" class="text-blue-500 animate-draw-line" />
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 max-w-4xl z-10 relative">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">Education</h2>
+            <div class="relative border-l-4 border-blue-500 pl-8 ml-4">
+                <!-- Education Entry 1 -->
+                <div class="mb-10 relative">
+                    <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-10 top-1.5 border-4 border-white"></div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-1">Bachelor's degree in Computer Science</h3>
+                    <p class="text-blue-600 text-lg mb-1">Siliguri Institute of Technology</p>
+                    <p class="text-gray-500 text-sm mb-2">2023 - 2026</p>
+                    <p class="text-gray-700"> Specialization in Arificial Intelligence and Macgine Learning. Achieved an overall CGPA 7.8 till 6 th semester.</p>
+                </div>
+                <!-- Education Entry 2 -->
+                <div class="mb-10 relative">
+                    <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-10 top-1.5 border-4 border-white"></div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-1">Diploma in Electrical Engineering</h3>
+                    <p class="text-blue-600 text-lg mb-1">Jalpaiguri Polytechnic Institute</p>
+                    <p class="text-gray-500 text-sm mb-2">2019 - 2022</p>
+                    <p class="text-gray-700">Gained foundations in Electrical engineering. Graduated with 81 %.</p>
+                </div>
+                <!-- Education Entry 3 -->
+                <div class="mb-10 relative">
+                    <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-10 top-1.5 border-4 border-white"></div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-1">School degree</h3>
+                    <p class="text-blue-600 text-lg mb-1">St.Claret School</p>
+                    <p class="text-gray-500 text-sm mb-2">2006 - 2019</p>
+                    <p class="text-gray-700"> Overall Percentage 79 % .</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="relative py-10 bg-gray-50 transition-colors duration-300 opacity-0 transform translate-y-10 section-animated">
+        <div class="absolute inset-0 z-0 opacity-25">
+            <svg class="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <pattern id="dots-skills" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <circle cx="1" cy="1" r="0.5" fill="currentColor" class="text-green-500" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#dots-skills)" class="animate-fade-in-slow" />
+                <path d="M 0 50 L 100 50" fill="none" stroke="currentColor" stroke-width="0.1" class="text-blue-500 animate-scan-line" />
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 max-w-5xl z-10 relative">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">My Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                <!-- Skill Card 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200
+                            hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-4 text-center">Programming Languages</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Python
+                        </li>
+                        
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            JavaScript
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            SQL
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            C++
+                        </li>
+                    </ul>
+                </div>
+                <!-- Skill Card 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200
+                            hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-4 text-center">Frontend Development</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            HTML
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            CSS
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            React
+                        </li>
+                        
+                        </li>
+                        
+                    
+                        
+                        </li>
+                    </ul>
+                </div>
+                <!-- Skill Card 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200
+                            hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-4 text-center">Backend Development</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Node.js
+                        </li>
+                       
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Django
+                        </li>
+                        
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            REST APIs
+                        </li>
+                       
+                        </li>
+                    </ul>
+                </div>
+                <!-- Skill Card 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200
+                            hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-4 text-center">Databases</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            MongoDB
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            PostgreSQL
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            MySQL
+                        </li>
+                        
+                        </li>
+                    </ul>
+                </div>
+                <!-- Skill Card 5 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200
+                            hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-4 text-center">Tools & Technologies</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Git
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Docker
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            AWS
+                        </li>
+                        
+                        </li>
+                        
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            VS Code
+                        </li>
+                    </ul>
+                </div>
+                <!-- Skill Card 6 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200
+                            hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-4 text-center">Soft Skills</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Problem Solving
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Teamwork
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Communication
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Adaptability
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Time Management
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Skills Section -->
+    <section id="professional-skills" class="relative py-10 bg-white transition-colors duration-300 opacity-0 transform translate-y-10 section-animated">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <svg class="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <pattern id="pro-skills-pattern" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <path d="M 0 0 L 10 10 M 10 0 L 0 10" fill="none" stroke="currentColor" stroke-width="0.1" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#pro-skills-pattern)" class="text-indigo-700 opacity-15" />
+                <circle cx="25" cy="75" r="1" fill="currentColor" class="text-green-500 animate-pulse-slow animation-delay-100" />
+                <circle cx="75" cy="25" r="1.2" fill="currentColor" class="text-blue-500 animate-pulse-slow animation-delay-300" />
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 max-w-6xl z-10 relative">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">Professional Skills</h2>
+            <div class="grid grid-cols-1 gap-4">
+                <!-- Professional Skill Card 1 -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200
+                            overflow-hidden hover:shadow-xl hover:scale-[1.03] transition-all duration-900">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">3D Printing & Additive Manufacturing</h3>
+                        <p class="text-gray-700 mb-4 text-sm">Training on various 3D printing technologies and machines, materials, design for additive manufacturing, and post-processing techniques.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1 rounded-full">SLA</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1 rounded-full">FDM</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1 rounded-full">SLS</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1 rounded-full">CLAY 3D Printing</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1 rounded-full">CAD Software</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                            <button class="view-glances-btn flex-1 bg-blue-600 text-white text-center py-2 rounded-lg font-semibold
+                                       hover:bg-blue-700 transition-colors duration-300 text-sm"
+                                    data-main-skill="3D Printing & Additive Manufacturing"
+                                    data-sub-skills='[
+                                        {"id": "Inaguration", "text": "Program conducted by C-DAC", "imageUrl": "./images/glance 1.jpg"},
+                                        {"id": "machine2", "text": "Inaguration", "imageUrl": "./images/glance 0.0.jpg"},
+                                        {"id": "teaching1", "text": "With the Teachers of the Program", "imageUrl": "./images/glance 0.jpg"},
+                                        {"id": "teaching2", "text": "Hands on Training", "imageUrl": "./images/glance 2.jpg"},
+                                        {"id": "machine3", "text": "Our Training Centre", "imageUrl": "./images/glance 3.jpg"},
+                                        {"id": "teaching3", "text": "3D Scanning using EinScan Pro", "imageUrl": "./images/glance 0.1.jpg"},
+                                        {"id": "concept1", "text": "Practice time", "imageUrl": "./images/glance 5.jpg"},
+                                        {"id": "concept2", "text": "Our Team", "imageUrl": "./images/glance 6.jpg"},
+                                        {"id": "process1", "text": "how 3d printing is done", "imageUrl": "./images/glance 7.jpg"},
+                                        {"id": "process2", "text": "Our Machines", "imageUrl": "./images/glance 10.jpg"}
+                                    ]'>
+                                View Glances
+                            </button>
+                            <button class="design-btn flex-1 bg-green-600 text-white text-center py-2 rounded-lg font-semibold
+                                       hover:bg-green-700 transition-colors duration-300 text-sm"
+                                    data-design-images='[
+                                        "./images/model 1.jpg",
+                                        "./images/model 9.jpg",
+                                        "./images/model 3.jpg",
+                                        "./images/model 4.jpg",
+                                        "./images/model 5.jpg",
+                                        "./images/model 6.jpg"
+                                        
+                                        
+                                    ]'>
+                                Design
+                            </button>
+                            <button class="certificate-btn flex-1 bg-purple-600 text-white text-center py-2 rounded-lg font-semibold
+                                       hover:bg-purple-700 transition-colors duration-300 text-sm"
+                                    data-certificate-url="./images/coming.jpeg">
+                                Certificate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="relative py-10 bg-white transition-colors duration-300 opacity-0 transform translate-y-10 section-animated">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <svg class="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <pattern id="network-nodes" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <circle cx="10" cy="10" r="1" fill="currentColor" class="text-red-500" />
+                        <line x1="0" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="0.1" class="text-gray-400" />
+                        <line x1="10" y1="0" x2="10" y2="20" stroke="currentColor" stroke-width="0.1" class="text-gray-400" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#network-nodes)" />
+                <circle cx="50" cy="50" r="2" fill="currentColor" class="text-yellow-400 animate-ping-medium" />
+                <line x1="20" y1="20" x2="80" y1="80" stroke="currentColor" stroke-width="0.3" class="text-green-400 animate-draw-path-slow" />
+                <line x1="80" y1="20" x2="20" y1="80" stroke="currentColor" stroke-width="0.3" class="text-blue-400 animate-draw-path-slow animation-delay-1000" />
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 max-w-6xl z-10 relative">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Project Card 1 -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200
+                            overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                    <img src="./images/project 1.png" alt="Password Generator"
+                         class="w-full h-52 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x250/CCCCCC/FFFFFF?text=Image+Not+Found';" />
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Password generator</h3>
+                        <p class="text-gray-700 mb-4 text-sm">A website randomly to create a password with combination of number alphabets and symbols as per requirement.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">JavaScript 47.7 %</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">CSS 31.7 %</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">HTML 20.6 %</span>
+                            
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="https://priyansu2820.github.io/password-generator/" target="_blank" rel="noopener noreferrer" class="flex-1 bg-blue-600 text-white text-center py-2 rounded-lg font-semibold
+                                     hover:bg-blue-700 transition-colors duration-300 text-sm">
+                                View Project
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200
+                            overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                    <img src="./images/project 2.png" alt="Password Manager App"
+                         class="w-full h-52 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x250/CCCCCC/FFFFFF?text=Image+Not+Found';" />
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Password Manager</h3>
+                        <p class="text-gray-700 mb-4 text-sm">An application to store and manage password with username.The passwords are secured with master password . </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">JavaScript 68.2 %</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">CSS 31.5 %</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">HTML 0.3 % & 100 % for the website</span>
+
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="https://priyansu2820.github.io/password-vault-website/" target="_blank" rel="noopener noreferrer" class="flex-1 bg-blue-600 text-white text-center py-2 rounded-lg font-semibold
+                                     hover:bg-blue-700 transition-colors duration-300 text-sm">
+                                View Project
+                            </a>
+                          
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 3 -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200
+                            overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                    <img src="./images/project 3.png" alt="Portfolio Website"
+                         class="w-full h-52 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x250/CCCCCC/FFFFFF?text=Image+Not+Found';" />
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Portfolio Website</h3>
+                        <p class="text-gray-700 mb-4 text-sm">My first basic personal portfolio website showcasing my skills, projects, and educational background, built with modern web technologies.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">HTML 44.8 % </span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">CSS 39.7 %</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">JavaScript 15.5 %</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="https://priyansu2820.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="flex-1 bg-blue-600 text-white text-center py-2 rounded-lg font-semibold
+                                     hover:bg-blue-700 transition-colors duration-300 text-sm">
+                                View Project
+                            </a>
+                            
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 4 -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200
+                            overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                    <img src="./images/project 4.png" alt="Audio Visualizor"
+                         class="w-full h-52 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x250/CCCCCC/FFFFFF?text=Image+Not+Found';" />
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Audio Visualizor</h3>
+                        <p class="text-gray-700 mb-4 text-sm">An audio visualizer dynamically displays sound, transforming music or speech into captivating real-time graphics. It creates an immersive experience by synchronizing visual patterns with audio frequencies and amplitude.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">HTML 100 %</span>
+                           
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="https://priyansu2820.github.io/audio-visualizer/" target="_blank" rel="noopener noreferrer" class="flex-1 bg-blue-600 text-white text-center py-2 rounded-lg font-semibold
+                                     hover:bg-blue-700 transition-colors duration-300 text-sm">
+                                View Project
+                            </a>
+                            
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 5 -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200
+                            overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                    <img src="./images/project 5.png" alt="Real-time Collaborative Editor"
+                         class="w-full h-52 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x250/CCCCCC/FFFFFF?text=Image+Not+Found';" />
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Portfolio 2.0</h3>
+                        <p class="text-gray-700 mb-4 text-sm">My upgraded personal portfolio website showcasing my skills, projects, and educational background, built with modern web technologies.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">LANG</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">LANG</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">LANG</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">LANG</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="flex-1 bg-blue-600 text-white text-center py-2 rounded-lg font-semibold
+                                     hover:bg-blue-700 transition-colors duration-300 text-sm">
+                                View Project
+                            </a>
+                           
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 6 -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200
+                            overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                    <img src="./images/coming.jpeg" alt="Weather Dashboard"
+                         class="w-full h-52 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x250/CCCCCC/FFFFFF?text=Image+Not+Found';" />
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">COMMING SOON</h3>
+                        <p class="text-gray-700 mb-4 text-sm"> DESCRIPTION </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">LANG</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">LANG</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">LANG</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">LANG</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="flex-1 bg-blue-600 text-white text-center py-2 rounded-lg font-semibold
+                                     hover:bg-blue-700 transition-colors duration-300 text-sm">
+                                View Project
+                            </a>
+                            
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="relative py-10 bg-gray-50 transition-colors duration-300 opacity-0 transform translate-y-10 section-animated">
+        <div class="absolute inset-0 z-0 opacity-25">
+            <svg class="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <pattern id="data-stream" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <path d="M 0 5 L 10 5" stroke="currentColor" stroke-width="0.2" class="text-purple-500" />
+                        <path d="M 5 0 L 5 10" stroke="currentColor" stroke-width="0.2" class="text-blue-500" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#data-stream)" />
+                <text x="5" y="15" font-size="4" fill="currentColor" class="text-green-300 animate-data-flow animation-delay-100">1010</text>
+                <text x="80" y="50" font-size="4.5" fill="currentColor" class="text-cyan-300 animate-data-flow animation-delay-500">0110</text>
+                <text x="30" y="85" font-size="3.8" fill="currentColor" class="text-yellow-300 animate-data-flow animation-delay-1000">1101</text>
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 max-w-6xl z-10 relative">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">Certifications</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                <!-- Certificate Card 1 -->
+                <div class="flip-card" data-certificate-url="./images/certificate 1.jpeg">
+                    <div class="flip-card-inner shadow-lg">
+                        <div class="flip-card-front">
+                            <img src="./images/certificate 1.jpeg" alt="AWS Certified Solutions Architect – Associate"
+                                 class="w-24 h-24 object-contain mb-4 rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/100x100/CCCCCC/FFFFFF?text=Cert';" />
+                            <h3 class="text-xl font-bold mb-1 text-center">Diploma in information technology - D.I.T.A</h3>
+                            <p class="text-md text-blue-600 mb-1">NYCTA</p>
+                            <p class="text-sm text-gray-500">Issued: September 2022</p>
+                        </div>
+                        <div class="flip-card-back shadow-lg">
+                            <p class="placeholder-text">Click to view certificate</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Certificate Card 2 -->
+                <div class="flip-card" data-certificate-url="./images/certificate 2.jpg">
+                    <div class="flip-card-inner shadow-lg">
+                        <div class="flip-card-front">
+                            <img src="./images/certificate 2.jpg" alt="Google Cloud Professional Data Engineer"
+                                 class="w-24 h-24 object-contain mb-4 rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/100x100/CCCCCC/FFFFFF?text=Cert';" />
+                            <h3 class="text-xl font-bold mb-1 text-center">Deloitte Data Analytics - J.S</h3>
+                            <p class="text-md text-blue-600 mb-1">Deloitte</p>
+                            <p class="text-sm text-gray-500">Issued: June 2025</p>
+                        </div>
+                        <div class="flip-card-back shadow-lg">
+                            <p class="placeholder-text">Click to view certificate</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Certificate Card 3 -->
+                <div class="flip-card" data-certificate-url="./images/certificate 6.jpg">
+                    <div class="flip-card-inner shadow-lg">
+                        <div class="flip-card-front">
+                            <img src="./images/certificate 6.jpg" alt="Certified Kubernetes Administrator (CKA)"
+                                 class="w-24 h-24 object-contain mb-4 rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/100x100/CCCCCC/FFFFFF?text=Cert';" />
+                            <h3 class="text-xl font-bold mb-1 text-center">Google Cloud Arcade Program</h3>
+                            <p class="text-md text-blue-600 mb-1">Cloud Native Computing Foundation</p>
+                            <p class="text-sm text-gray-500">Issued: june 2025</p>
+                        </div>
+                        <div class="flip-card-back shadow-lg">
+                            <p class="placeholder-text">Click to view certificate</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Certificate Card 4 -->
+                <div class="flip-card" data-certificate-url="./images/certificate 3.jpg">
+                    <div class="flip-card-inner shadow-lg">
+                        <div class="flip-card-front">
+                            <img src="./images/certificate 3.jpg" alt="Microsoft Certified: Azure Developer Associate"
+                                 class="w-24 h-24 object-contain mb-4 rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/100x100/CCCCCC/FFFFFF?text=Cert';" />
+                            <h3 class="text-xl font-bold mb-1 text-center">S.I.T Technovision 2k24</h3>
+                            <p class="text-md text-blue-600 mb-1">Inter Collage Gaming Competition</p>
+                            <p class="text-sm text-gray-500">Issued: april 2024</p>
+                        </div>
+                        <div class="flip-card-back shadow-lg">
+                            <p class="placeholder-text">Click to view certificate</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Certificate Card 5 -->
+                <div class="flip-card" data-certificate-url="./images/certificate 4.jpg">
+                    <div class="flip-card-inner shadow-lg">
+                        <div class="flip-card-front">
+                            <img src="./images/certificate 4.jpg" alt="Professional Scrum Master I (PSM I)"
+                                 class="w-24 h-24 object-contain mb-4 rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/100x100/CCCCCC/FFFFFF?text=Cert';" />
+                            <h3 class="text-xl font-bold mb-1 text-center">Diploma in Electrical Engineering</h3>
+                            <p class="text-md text-blue-600 mb-1">WBSCTE</p>
+                            <p class="text-sm text-gray-500">Issued: July 2022</p>
+                        </div>
+                        <div class="flip-card-back shadow-lg">
+                            <p class="placeholder-text">Click to view certificate</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Certificate Card 6 -->
+                <div class="flip-card" data-certificate-url="./images/coming.jpeg">
+                    <div class="flip-card-inner shadow-lg">
+                        <div class="flip-card-front">
+                            <img src="./images/coming.jpeg" alt="Open Source Contributor"
+                                 class="w-24 h-24 object-contain mb-4 rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/100x100/CCCCCC/FFFFFF?text=Cert';" />
+                            <h3 class="text-xl font-bold mb-1 text-center">Open Source Contributor</h3>
+                            <p class="text-md text-blue-600 mb-1">GitHub</p>
+                            <p class="text-sm text-gray-500">Ongoing</p>
+                        </div>
+                        <div class="flip-card-back shadow-lg">
+                            <p class="placeholder-text">Click to view certificate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-10 bg-white transition-colors duration-300 opacity-0 transform translate-y-10 section-animated">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <svg class="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <pattern id="dots-contact" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <circle cx="5" cy="5" r="0.8" fill="currentColor" class="text-blue-600" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#dots-contact)" />
+                <rect x="0" y="0" width="100" height="100" fill="none" stroke="currentColor" stroke-width="0.1" class="text-gray-500 animate-fade-in-slow" />
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 max-w-3xl z-10 relative">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">Get In Touch</h2>
+            <div class="bg-white p-8 rounded-xl shadow-xl border border-gray-200">
+                <p class="text-lg text-center mb-8">
+                    I'm always open to new opportunities and collaborations. Feel free to reach out!
+                </p>
+                <form id="contactForm" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                        <input type="text" id="name" name="name"
+                               class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300"
+                               placeholder="Your Name" required />
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email" name="email"
+                               class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300"
+                               placeholder="your.email@example.com" required />
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                        <textarea id="message" name="message" rows="5"
+                                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300"
+                                  placeholder="Your message..." required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold text-lg shadow-md
+                               hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Send Message
+                    </button>
+                    <div id="formMessage" class="mt-4 text-center text-sm"></div>
+                </form>
+                <div class="mt-10 text-center text-gray-700">
+                    <p class="mb-4">You can also find me on:</p>
+                    <div class="flex justify-center space-x-6">
+                        <!-- Facebook Icon -->
+                        <a href="https://www.facebook.com/share/15fo9xi8L4/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="text-blue-800 hover:scale-110 transition-transform duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.588-1.333h2.412v-3.996h-3.225c-3.266 0-4.775 1.945-4.775 4.622v2.607z"/>
+                            </svg>
+                        </a>
+                        <!-- GitHub Icon -->
+                        <a href="https://github.com/priyansu2820" target="_blank" rel="noopener noreferrer" class="text-gray-800 hover:scale-110 transition-transform duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.08-.731.084-.716.084-.716 1.192.085 1.816 1.205 1.816 1.205 1.057 1.815 2.77.992 3.432.753.107-.587.417-.992.76-1.224-2.62-.295-5.066-1.309-5.066-5.828 0-1.288.465-2.339 1.229-3.164-.121-.295-.531-1.492.102-3.129 0 0 1-.316 3.273 1.205.945-.263 1.94-.395 2.934-.399 1.004.004 1.999.136 2.944.399 2.272-1.521 3.272-1.205 3.272-1.205.633 1.637.223 2.834.102 3.129.764.825 1.229 1.876 1.229 3.164 0 4.53-2.449 5.527-5.074 5.819.398.343.753 1.02.753 2.056v3.029c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <!-- Instagram Icon -->
+                        <a href="https://www.instagram.com/theycall_me_rider?igsh=MXR3M2MzZ25weXoxdg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="text-pink-600 hover:scale-110 transition-transform duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-3.251-.148-4.77-1.691-4.919-4.919-.058-1.265-.07-1.646-.07-4.85s.012-3.584.07-4.85c.149-3.227 1.664-4.771 4.919-4.919 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.073 4.948.073s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c3.403 0 6.162 2.759 6.162 6.162s-2.759 6.163-6.162 6.163-6.162-2.759-6.162-6.163c0-3.403 2.759-6.162 6.162-6.162zm0 2.163c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4zm6.406-5.964c-.886 0-1.606.72-1.606 1.606s.72 1.606 1.606 1.606c.886 0 1.606-.72 1.606-1.606s-.72-1.606-1.606-1.606z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-900 text-center text-gray-400 text-sm">
+        <div class="container mx-auto px-4">
+            <p>&copy; <span id="currentYear"></span> priyansukundu. @All rights reserved.</p>
+            <p class="mt-2">Built with Intelligence.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" class="fixed bottom-6 right-6 p-3 rounded-full shadow-lg transition-all duration-300
+                opacity-0 translate-y-4 pointer-events-none
+                bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <!-- General Certificate Modal -->
+    <div id="certificateModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button">&times;</button>
+            <img id="certificateModalImage" src="" alt="Certificate" class="modal-image" />
+        </div>
+    </div>
+
+    <!-- Skill Details Modal -->
+    <div id="skillDetailsModal" class="modal-overlay hidden">
+        <div class="modal-content p-6 max-w-3xl w-full">
+            <button class="modal-close-button">&times;</button>
+            <h3 id="skillDetailsTitle" class="text-2xl font-bold text-center mb-4"></h3>
+            <div id="imageSlideshowContainer" class="flex flex-col items-center justify-center space-y-6">
+                <!-- Image Slideshow will be rendered here by JS -->
+            </div>
+            <p id="skillDetailsDescription" class="text-center text-sm text-gray-600 mt-4"></p>
+        </div>
+    </div>
+
+    <!-- Design Gallery Modal -->
+    <div id="designGalleryModal" class="modal-overlay hidden">
+        <div class="modal-content p-6 max-w-4xl w-full">
+            <button class="modal-close-button">&times;</button>
+            <h3 class="text-2xl font-bold text-center mb-6">Design Portfolio</h3>
+            <div id="designGalleryImages" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto max-h-[70vh] p-2">
+                <!-- Design images will be rendered here by JS -->
+            </div>
+            <p class="text-center text-sm text-gray-600 mt-4">A collection of my design work and concepts.</p>
+        </div>
+    </div>
+
+    <script>
+        // Global state variables for client-side JS
+        let darkMode = false;
+        let activeSection = 'hero'; // Track active section for nav highlighting
+        let slideshowInterval = null;
+        let currentSlideshowImageIndex = 0;
+        let currentSlideshowImages = [];
+        let isTransitioning = false; // NEW: Flag to prevent rapid clicks during transition
+
+        // DOM Elements
+        const body = document.body;
+        const html = document.documentElement;
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        // Modals
+        const certificateModal = document.getElementById('certificateModal');
+        const certificateModalImage = document.getElementById('certificateModalImage');
+        const certificateModalCloseBtn = certificateModal.querySelector('.modal-close-button');
+
+        const skillDetailsModal = document.getElementById('skillDetailsModal');
+        const skillDetailsTitle = document.getElementById('skillDetailsTitle');
+        const imageSlideshowContainer = document.getElementById('imageSlideshowContainer');
+        const skillDetailsDescription = document.getElementById('skillDetailsDescription');
+        const skillDetailsModalCloseBtn = skillDetailsModal.querySelector('.modal-close-button');
+
+        const designGalleryModal = document.getElementById('designGalleryModal');
+        const designGalleryImagesContainer = document.getElementById('designGalleryImages');
+        const designGalleryModalCloseBtn = designGalleryModal.querySelector('.modal-close-button');
+
+        // Section references for Intersection Observer
+        const sections = [
+            { id: 'hero', element: document.getElementById('hero') },
+            { id: 'about', element: document.getElementById('about') },
+            { id: 'education', element: document.getElementById('education') },
+            { id: 'skills', element: document.getElementById('skills') },
+            { id: 'professional-skills', element: document.getElementById('professional-skills') },
+            { id: 'projects', element: document.getElementById('projects') },
+            { id: 'certifications', element: document.getElementById('certifications') },
+            { id: 'contact', element: document.getElementById('contact') },
+        ];
+
+        // --- Utility Functions ---
+
+        // Toggle dark mode
+        function toggleDarkMode() {
+            darkMode = !darkMode;
+            html.classList.toggle('dark', darkMode);
+            body.classList.toggle('bg-gray-900', darkMode);
+            body.classList.toggle('text-gray-100', darkMode);
+            body.classList.toggle('bg-gray-50', !darkMode);
+            body.classList.toggle('text-gray-800', !darkMode);
+
+            // Update dark mode specific classes for the toggle button itself
+            darkModeToggle.classList.toggle('dark:bg-gray-700', darkMode);
+            darkModeToggle.classList.toggle('dark:text-yellow-300', darkMode);
+            darkModeToggle.classList.toggle('dark:hover:bg-gray-600', darkMode);
+            darkModeToggle.classList.toggle('dark:focus:ring-gray-500', darkMode);
+            darkModeToggle.classList.toggle('bg-white', !darkMode);
+            darkModeToggle.classList.toggle('text-gray-700', !darkMode);
+            darkModeToggle.classList.toggle('hover:bg-gray-100', !darkMode);
+            darkModeToggle.classList.toggle('focus:ring-blue-500', !darkMode);
+
+            // Update SVG icon based on dark mode
+            darkModeToggle.innerHTML = darkMode ? `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-4.275l.707-.707M6.707 6.707l-.707-.707m12.62 12.62l-.707.707M6.707 17.293l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+            ` : `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            `;
+        }
+
+        // Open a modal
+        function openModal(modalElement) {
+            modalElement.classList.remove('hidden');
+            body.style.overflow = 'hidden'; // Disable body scroll
+        }
+
+        // Close a modal
+        function closeModal(modalElement) {
+            modalElement.classList.add('hidden');
+            body.style.overflow = 'unset'; // Enable body scroll
+        }
+
+        // Image Slideshow Renderer
+        function renderImageSlideshow(images) {
+            if (!images || images.length === 0) {
+                imageSlideshowContainer.innerHTML = '<div class="text-center text-gray-500 dark:text-gray-400">No images to display.</div>';
+                return;
+            }
+
+            currentSlideshowImages = images;
+            currentSlideshowImageIndex = 0;
+
+            const slideshowHTML = `
+                <div class="relative w-full max-w-xl mx-auto rounded-lg overflow-hidden shadow-lg bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                    <img id="slideshowImage" src="${images[0].imageUrl}" alt="${images[0].text || 'Slideshow image 1'}"
+                         class="w-full h-96 object-contain image-slideshow-img" style="opacity: 1;"
+                         onerror="this.onerror=null; this.src='https://placehold.co/800x600/CCCCCC/FFFFFF?text=Image+Not+Found';" />
+                    <div class="absolute inset-x-0 bottom-0 bg-black bg-opacity-50 text-white p-2 text-center">
+                        ${images[0].text}
+                    </div>
+                    <button id="prevSlideBtn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-colors z-10">
+                        &#9664;
+                    </button>
+                    <button id="nextSlideBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-colors z-10">
+                        &#9654;
+                    </button>
+                </div>
+            `;
+            imageSlideshowContainer.innerHTML = slideshowHTML;
+
+            const slideshowImage = document.getElementById('slideshowImage');
+            const prevSlideBtn = document.getElementById('prevSlideBtn');
+            const nextSlideBtn = document.getElementById('nextSlideBtn');
+
+            const updateSlideshowImage = (index) => {
+                if (isTransitioning) return; // Prevent new transition if one is active
+                isTransitioning = true; // Set flag
+                prevSlideBtn.disabled = true; // Disable buttons
+                nextSlideBtn.disabled = true;
+
+                slideshowImage.style.opacity = 0; // Start fade out
+
+                // After fade-out, change image source and fade in
+                setTimeout(() => {
+                    slideshowImage.src = currentSlideshowImages[index].imageUrl;
+                    slideshowImage.alt = currentSlideshowImages[index].text || `Slideshow image ${index + 1}`;
+                    slideshowImage.nextElementSibling.textContent = currentSlideshowImages[index].text; // Update text
+
+                    // Ensure image is loaded before setting opacity to 1
+                    slideshowImage.onload = () => {
+                        slideshowImage.style.opacity = 1; // Fade in new image
+                        isTransitioning = false; // Reset flag
+                        prevSlideBtn.disabled = false; // Enable buttons
+                        nextSlideBtn.disabled = false;
+                        slideshowImage.onload = null; // Remove onload handler
+                    };
+                    // Fallback for cached images or errors if onload doesn't fire
+                    if (slideshowImage.complete) {
+                        slideshowImage.onload();
+                    }
+                }, 700); // Match CSS transition duration for opacity
+            };
+
+            const resetSlideshowTimer = () => {
+                if (slideshowInterval) {
+                    clearInterval(slideshowInterval);
+                }
+                slideshowInterval = setInterval(nextSlide, 5000); // Restart auto-play
+            };
+
+            const nextSlide = () => {
+                if (isTransitioning) return;
+                currentSlideshowImageIndex = (currentSlideshowImageIndex + 1) % currentSlideshowImages.length;
+                updateSlideshowImage(currentSlideshowImageIndex);
+                resetSlideshowTimer(); // Reset timer on manual interaction
+            };
+
+            const prevSlide = () => {
+                if (isTransitioning) return;
+                currentSlideshowImageIndex = (currentSlideshowImageIndex === 0) ? currentSlideshowImages.length - 1 : currentSlideshowImageIndex - 1;
+                updateSlideshowImage(currentSlideshowImageIndex);
+                resetSlideshowTimer(); // Reset timer on manual interaction
+            };
+
+            prevSlideBtn.onclick = prevSlide;
+            nextSlideBtn.onclick = nextSlide;
+
+            // Clear previous interval if any and start new one
+            resetSlideshowTimer();
+        }
+
+        // --- Event Listeners and Initial Setup ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Dark Mode Toggle
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+
+            // Back to Top Button visibility
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    backToTopBtn.classList.add('opacity-100', 'translate-y-0');
+                } else {
+                    backToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+                    backToTopBtn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                }
+            });
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Intersection Observer for section animations and active navigation
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.05,
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const sectionElement = entry.target;
+                    if (entry.isIntersecting) {
+                        sectionElement.classList.add('animate-in-view');
+                        // Update active navigation link
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${sectionElement.id}`) {
+                                link.classList.add('text-blue-600', 'border-b-2', 'border-blue-600', 'pb-1');
+                                link.classList.remove('text-gray-700', 'hover:text-blue-600');
+                                // Apply dark mode specific classes if dark mode is active
+                                if (darkMode) {
+                                    link.classList.add('dark:text-blue-400', 'dark:border-blue-400');
+                                    link.classList.remove('dark:text-gray-300', 'dark:hover:text-blue-400');
+                                }
+                            } else {
+                                link.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600', 'pb-1', 'dark:text-blue-400', 'dark:border-blue-400');
+                                link.classList.add('text-gray-700', 'hover:text-blue-600');
+                                if (darkMode) {
+                                    link.classList.add('dark:text-gray-300', 'dark:hover:text-blue-400');
+                                }
+                            }
+                        });
+                    } else {
+                        sectionElement.classList.remove('animate-in-view');
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                if (section.element) {
+                    observer.observe(section.element);
+                }
+            });
+
+            // --- Modal Event Listeners ---
+
+            // General Certificate Modal
+            document.querySelectorAll('.flip-card').forEach(card => {
+                let isFlipped = false;
+                let showHint = true; // Initial hint state
+
+                // Trigger hint animation once
+                setTimeout(() => {
+                    if (showHint) {
+                        card.classList.add('flip-card-hint-animation');
+                        setTimeout(() => {
+                            card.classList.remove('flip-card-hint-animation');
+                            showHint = false;
+                        }, 1500); // Match animation duration
+                    }
+                }, 500); // Delay hint start
+
+                card.addEventListener('click', () => {
+                    const certificateUrl = card.dataset.certificateUrl;
+                    isFlipped = !isFlipped;
+                    card.classList.toggle('flipped', isFlipped);
+
+                    if (isFlipped && certificateUrl) {
+                        setTimeout(() => {
+                            certificateModalImage.src = certificateUrl;
+                            openModal(certificateModal);
+                        }, 300); // Delay opening modal slightly to allow flip animation to start
+                    }
+                });
+            });
+
+            certificateModalCloseBtn.addEventListener('click', () => {
+                closeModal(certificateModal);
+                // Find and unflip the currently flipped card
+                document.querySelectorAll('.flip-card').forEach(card => {
+                    card.classList.remove('flipped');
+                });
+            });
+            certificateModal.addEventListener('click', (e) => {
+                if (e.target === certificateModal) { // Only close if clicking on overlay, not content
+                    closeModal(certificateModal);
+                    document.querySelectorAll('.flip-card').forEach(card => {
+                        card.classList.remove('flipped');
+                    });
+                }
+            });
+
+            // Skill Details Modal (Glances)
+            document.querySelectorAll('.view-glances-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const mainSkill = button.dataset.mainSkill;
+                    const subSkills = JSON.parse(button.dataset.subSkills); // Parse the JSON string
+
+                    skillDetailsTitle.textContent = `${mainSkill} Glances`;
+                    skillDetailsDescription.textContent = `A visual representation of skills related to ${mainSkill}.`;
+                    renderImageSlideshow(subSkills); // Call the new slideshow renderer
+                    openModal(skillDetailsModal);
+                });
+            });
+
+            skillDetailsModalCloseBtn.addEventListener('click', () => {
+                closeModal(skillDetailsModal);
+                if (slideshowInterval) {
+                    clearInterval(slideshowInterval); // Stop slideshow when modal closes
+                    slideshowInterval = null;
+                }
+            });
+            skillDetailsModal.addEventListener('click', (e) => {
+                if (e.target === skillDetailsModal) {
+                    closeModal(skillDetailsModal);
+                    if (slideshowInterval) {
+                        clearInterval(slideshowInterval);
+                        slideshowInterval = null;
+                    }
+                }
+            });
+
+            // Design Gallery Modal
+            document.querySelectorAll('.design-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const designImages = JSON.parse(button.dataset.designImages);
+                    designGalleryImagesContainer.innerHTML = ''; // Clear previous images
+
+                    designImages.forEach((imgSrc, index) => {
+                        const div = document.createElement('div');
+                        div.className = 'bg-gray-100 rounded-lg shadow-md overflow-hidden';
+                        div.innerHTML = `
+                            <img src="${imgSrc}" alt="Design ${index + 1}"
+                                 class="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-200"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Design+Image';" />
+                            <p class="p-3 text-sm text-center">Design Concept ${index + 1}</p>
+                        `;
+                        designGalleryImagesContainer.appendChild(div);
+                    });
+                    openModal(designGalleryModal);
+                });
+            });
+
+            designGalleryModalCloseBtn.addEventListener('click', () => {
+                closeModal(designGalleryModal);
+            });
+            designGalleryModal.addEventListener('click', (e) => {
+                if (e.target === designGalleryModal) {
+                    closeModal(designGalleryModal);
+                }
+            });
+
+            // Certificate button in Professional Skills (opens general certificate modal)
+            document.querySelectorAll('.certificate-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const certificateUrl = button.dataset.certificateUrl;
+                    certificateModalImage.src = certificateUrl;
+                    openModal(certificateModal);
+                });
+            });
+
+            // Handle Contact Form Submission
+            contactForm.addEventListener('submit', async (event) => {
+                event.preventDefault(); // Prevent default form submission
+
+                const formData = new FormData(contactForm);
+                const data = Object.fromEntries(formData.entries());
+
+                try {
+                    const response = await fetch('/send-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    if (response.ok) {
+                        formMessage.textContent = 'Message sent successfully!';
+                        formMessage.className = 'mt-4 text-center text-sm text-green-600';
+                        contactForm.reset(); // Clear the form
+                    } else {
+                        const errorData = await response.json();
+                        formMessage.textContent = `Failed to send message: ${errorData.message || 'Unknown error'}`;
+                        formMessage.className = 'mt-4 text-center text-sm text-red-600';
+                    }
+                } catch (error) {
+                    console.error('Error submitting form:', error);
+                    formMessage.textContent = 'An error occurred. Please try again later.';
+                    formMessage.className = 'mt-4 text-center text-sm text-red-600';
+                }
+            });
+
+            // Initial dark mode setup (if you want it to start in dark mode based on system preference or a saved setting)
+            // Example: Check system preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                 // Optionally start in dark mode if system prefers it
+                 // toggleDarkMode(); // Uncomment this line if you want it to start in dark mode
+            }
+        });
+    </script>
+</body>
+</html>
